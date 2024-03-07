@@ -7,10 +7,13 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+
 import Layout from "./Layout";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
+import User from "./components/User/User";
+import Github ,{githubInfoLoader} from "./components/Github/Github";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 /*const router=createBrowserRouter([
     {
@@ -32,11 +35,17 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
       ]
     }
   ])*/
-const router = createBrowserRouter(createRoutesFromElements(<Route path="/" element= {<Layout/>}>
-  <Route path="" element={<Home />} />
-  <Route path="/about" element={<About/>} />
-  <Route path="/contact" element={<Contact />} />
-</Route>));
+ const router= createBrowserRouter(createRoutesFromElements(
+  <Route path="/" element={<Layout/>}>
+    <Route path="" element={<Home/>}></Route>
+    <Route path="about" element={<About/>} />
+    <Route path="contact" element={<Contact/>} />
+    <Route path="user/:userid" element={<User/>} />
+    <Route
+    loader={githubInfoLoader}
+     path="github" element={<Github/>} />
+  </Route>
+ ));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
